@@ -4,15 +4,13 @@
       class="no-selectable"
       v-for="(pokemon, index) in pokemons"
       :key="'poke' + index"
+      @click="setPokemonUrl(pokemon.url)"
     >
       <div class="img-container">
         <img :src="imageUrl + pokemon.id + '.png'" />
       </div>
       <h3 id="pkmnName">{{ pokemon.name }}</h3>
     </article>
-    <div id="scroll-trigger">
-      <div class="loader"></div>
-    </div>
   </div>
 </template>
 
@@ -22,19 +20,16 @@ export default {
   data: () => {
     return {
       pokemons: [],
-      nextUrl: "",
-      currentUrl: "",
     };
   },
   methods: {
     fetchData() {
-      let req = new Request(this.currentUrl);
+      let req = new Request(this.apiUrl);
       fetch(req)
         .then((resp) => {
           if (resp.status === 200) return resp.json();
         })
         .then((data) => {
-          this.nextUrl = data.next;
           data.results.forEach((pokemon) => {
             pokemon.id = pokemon.url
               .split("/")
@@ -49,9 +44,12 @@ export default {
           console.log(error);
         });
     },
+    setPokemonUrl(url) {
+      this.$emit("setPokemonUrl", url);
+      console.log(url);
+    },
   },
   created() {
-    this.currentUrl = this.apiUrl;
     this.fetchData();
   },
 };
@@ -84,31 +82,5 @@ img {
   height: 96px;
   -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
   filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
-}
-
-/* Loader Spinner */
-#scroll-trigger {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-}
-.loader {
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #34495e;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1.5s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>
