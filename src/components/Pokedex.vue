@@ -22,7 +22,7 @@
       @closeDetail="closeDetail"
     />
     <button id="topBtn" ref="btnTop" @click="topFunction()">
-      <p><i class="arrow up"></i></p>
+      <span class="arrow up"></span>
     </button>
   </div>
 </template>
