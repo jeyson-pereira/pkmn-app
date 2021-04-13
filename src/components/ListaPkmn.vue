@@ -4,12 +4,12 @@
       class="no-selectable"
       v-for="(pokemon, index) in pokemons"
       :key="'poke' + index"
-      @click="setPokemonUrl(pokemon.url)"
+      @click="setPokemonUrl(pokemon.url, pokemon.id)"
     >
       <div class="img-container">
         <img :src="imageUrl + pokemon.id + '.png'" />
       </div>
-      <h3 id="pkmnName">{{ pokemon.name }}</h3>
+      <h3>{{ pokemon.name }}</h3>
     </article>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     fetchData() {
-      let req = new Request(this.apiUrl);
+      let req = new Request(this.apiUrl.concat("?limit=151"));
       fetch(req)
         .then((resp) => {
           if (resp.status === 200) return resp.json();
@@ -44,9 +44,8 @@ export default {
           console.log(error);
         });
     },
-    setPokemonUrl(url) {
-      this.$emit("setPokemonUrl", url);
-      console.log(url);
+    setPokemonUrl(url, sId) {
+      this.$emit("setPokemonUrl", url, sId);
     },
   },
   created() {
@@ -60,8 +59,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 10px;
-  width: 95%;
-  max-width: 510px;
+  width: 90%;
+  max-width: 720px;
   padding-bottom: 20px;
 }
 article {
@@ -70,17 +69,19 @@ article {
   background-color: #fff;
   cursor: pointer;
   border-radius: 10px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
   padding: 10px;
   text-transform: capitalize;
 }
-
+h3 {
+  margin: 0;
+}
 img {
   width: 96px;
   height: 96px;
-  -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
-  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.4));
+  -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
 }
 </style>
