@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     fetchData() {
-      let req = new Request(this.apiUrl.concat("?limit=151"));
+      let req = new Request(this.apiUrl.concat("?limit=386"));
       fetch(req)
         .then((resp) => {
           if (resp.status === 200) return resp.json();
