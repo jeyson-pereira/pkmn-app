@@ -14,7 +14,7 @@
       <!-- Data Info -->
       <div v-if="pokemon" class="data">
         <h2 style="text-transform: capitalize">{{ pokemon.name }}</h2>
-        <p>{{ detail.flavor_text_entries[26].flavor_text }}</p>
+        <p>{{ description }}</p>
         <!-- Stats pokemon -->
         <div class="property">
           <div class="left">Experiencia Base</div>
@@ -70,6 +70,7 @@ export default {
       pokemon: {},
       detail: {},
       types: [],
+      description: "",
     };
   },
   methods: {
@@ -87,6 +88,7 @@ export default {
             })
             .then((data) => {
               this.detail = data;
+              this.flavorText(this.detail);
               this.pokemon.types.forEach((value) => {
                 fetch(value.type.url)
                   .then((resp) => {
@@ -108,6 +110,14 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    flavorText(detail) {
+      for (let index = 0; index <= detail.flavor_text_entries.length; index++) {
+        if (detail.flavor_text_entries[index].language.name === "es") {
+          this.description = detail.flavor_text_entries[index].flavor_text;
+          break;
+        }
+      }
     },
     closeDetail() {
       this.$emit("closeDetail");
