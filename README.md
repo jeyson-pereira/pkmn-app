@@ -1,4 +1,5 @@
 # pkmn-app
+Deploy Vercel [PokedexVue](https://pkmn-app.vercel.app/).
 
 ## Project setup
 ```
