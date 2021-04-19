@@ -9,6 +9,7 @@
         <h1 class="title vue">Vue</h1>
       </div>
     </div>
+    <BuscarPkmn :apiUrl="apiUrl" @setPokemonUrl="setPokemonUrl" />
     <ListaPkmn
       :imageUrl="imageUrl"
       :apiUrl="apiUrl"
@@ -30,10 +31,12 @@
 <script>
 import ListaPkmn from "./ListaPkmn.vue";
 import DetallePkmn from "./DetallePkmn.vue";
+import BuscarPkmn from "./BuscarPkmn";
 export default {
   components: {
     ListaPkmn,
     DetallePkmn,
+    BuscarPkmn,
   },
   data: () => {
     return {

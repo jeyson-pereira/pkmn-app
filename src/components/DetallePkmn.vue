@@ -8,7 +8,7 @@
           <img :src="imageUrl + pokemon.id + '.png'" />
         </div>
       </div>
-      <div class="id">
+      <div v-if="pokemon" class="id">
         {{ pokemon.id }}
       </div>
       <!-- Data Info -->
@@ -54,10 +54,11 @@
         </div>
       </div>
       <!-- Close Button -->
+      <h2 v-else>No se encontró el Pokémon</h2>
       <button class="close" @click="closeDetail">Cerrar</button>
     </div>
     <!-- Loading data -->
-    <div v-else class="loader"></div>
+    <div v-else class="loader" />
   </div>
 </template>
 
@@ -74,6 +75,17 @@ export default {
     };
   },
   methods: {
+    checkConnection() {
+      let req = new Request(this.pokemonUrl);
+      fetch(req).then((resp) => {
+        if (resp.status === 200) {
+          this.fetchData();
+        } else {
+          this.show = true;
+          this.pokemon = null;
+        }
+      });
+    },
     fetchData() {
       let req = new Request(this.pokemonUrl);
       fetch(req)
@@ -124,7 +136,7 @@ export default {
     },
   },
   created() {
-    this.fetchData();
+    this.checkConnection();
   },
 };
 </script>
