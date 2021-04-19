@@ -1,25 +1,12 @@
 # pkmn-app
-Deploy Vercel [PokedexVue](https://pkmn-app.vercel.app/).
+Despliege (Deploy) en Vercel [PokedexVue](https://pkmn-app.vercel.app/).
 
-## Project setup
+## Setup - Instalación
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compilado server local
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
