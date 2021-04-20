@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     setPokemonUrl() {
+      document.activeElement.blur(); //hide keyboard on mobile
       if (this.searchvalue !== "")
         this.$emit(
           "setPokemonUrl",
@@ -38,6 +39,7 @@ export default {
 }
 
 .searchbar input {
+  font-weight: bold;
   border: none;
   outline: none;
   border-radius: 5px;
