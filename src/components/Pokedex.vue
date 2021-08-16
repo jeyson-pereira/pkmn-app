@@ -40,7 +40,7 @@ export default {
   },
   data: () => {
     return {
-      imageUrl: "https://pokeres.bastionbot.org/images/pokemon/",
+      imageUrl: "https://cdn.traction.one/pokedex/pokemon/",
       apiUrl: "https://pokeapi.co/api/v2/pokemon",
       speciesUrl: "",
       pokemonUrl: "",
